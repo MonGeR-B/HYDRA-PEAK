@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const box = new THREE.Box3().setFromObject(model);
         const center = box.getCenter(new THREE.Vector3());
         
-        model.position.x = 0; // Center the model
+        model.position.x = 0; // Always center the model
         model.position.y = -center.y;
         
         const size = box.getSize(new THREE.Vector3());
@@ -151,7 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Header 1 Animation (Moves Left)
             // Starts at 0, moves to -100%
-            const header1Move = -100 * (progress * 3.5); 
+            // Starts at 0, moves to -100% faster (by 0.25 progress)
+            const header1Move = -100 * (progress * 4); 
             gsap.set(".header-1", { xPercent: Math.max(-150, header1Move) });
 
             // Circular Mask (Grows)

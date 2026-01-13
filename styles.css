@@ -112,7 +112,7 @@ section {
     background-color: #0d0d0d;
     clip-path: circle(0% at 50% 50%);
     /* Added 50% 50% for explicit center */
-    z-index: 20;
+    z-index: 1;
 }
 
 .tooltips {
@@ -128,6 +128,8 @@ section {
     /* Ensure tooltips are above the model */
     pointer-events: none;
     /* Allows scrolling over the container */
+    margin-top: -4rem;
+    /* Moves container higher */
 }
 
 .tooltip {
@@ -137,11 +139,15 @@ section {
     flex-direction: column;
     gap: 0.5rem;
     color: #e0dfdf;
+    /* Moves items lower */
 }
 
 .tooltip:nth-child(2) {
     justify-content: flex-end;
     align-items: flex-end;
+    position: relative;
+    top: 7rem;
+    /* Moves it down visually */
 }
 
 .tooltip .divider {
