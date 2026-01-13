@@ -1,0 +1,229 @@
+@import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PP Neue Montreal', sans-serif;
+    overflow-x: hidden; /* Added to prevent horizontal scrollbars during animations */
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 500;
+    line-height: 1;    
+}
+
+h2 {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 1.125;
+    letter-spacing: -0.03rem;    
+}
+
+p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+section {
+    position: relative;
+    width: 100vw;
+    height: 100svh;
+    background-color: #e0dfdf;
+    color: #0d0d0d;
+    overflow: hidden;
+}
+
+.intro, .outro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0d0d0d;
+    color: #e0dfdf;
+    padding: 2rem; /* Fixed: pading -> padding */
+}
+
+/* Fixed: .model-container -> .modal-container */
+.modal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none; /* Good practice: lets clicks pass through to UI behind model if needed */
+}
+
+.header-1 {
+    position: absolute;
+    width: 200svh; /* Keeps your original svh logic */
+    height: 100svh;
+    transform: translateX(0%);
+    z-index: 10; /* Added z-index to ensure visibility */
+}
+
+.header-2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150vw;
+    height: 100svh;
+    color: #e0dfdf;
+    transform: translateX(100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.header-1, .header-2 {
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.header-1 h1, .header-2 h1 {
+    width: 100%;
+    font-size: 15vw;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+.circular-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0d0d0d;
+    clip-path: circle(0% at 50% 50%); /* Added 50% 50% for explicit center */
+    z-index: 1;
+}
+
+.tooltips {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 75%;
+    display: flex;
+    gap: 15rem;
+    z-index: 101; /* Ensure tooltips are above the model */
+    pointer-events: none; /* Allows scrolling over the container */
+}
+
+.tooltip {
+    flex: 1; /* Fixed: frlx -> flex */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #e0dfdf;
+}
+
+.tooltip:nth-child(2) {
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.tooltip .divider {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: #5f5f5f;
+    margin: 0.5rem 0;
+    transform: scaleX(0);
+}
+
+/* Fixed: .tooltop -> .tooltip */
+.tooltip:nth-child(1) .divider {
+    transform-origin: right center; /* Fixed: right-center -> right center */
+}
+
+/* Fixed: .tooltop -> .tooltip */
+.tooltip:nth-child(2) .divider {
+    transform-origin: left center; /* Fixed: left-center -> left center */
+}
+
+.tooltip .icon {
+    font-size: 2.5rem;
+    overflow: hidden;
+}
+
+.tooltip .description {
+    color: #5f5f5f;
+}
+
+.tooltip:nth-child(2) .icon,
+.tooltip:nth-child(2) .title,
+.tooltip .description {
+    width: 70%;
+}
+
+/* Fixed: Added .icon to match JS animation logic */
+.tooltip .icon ion-icon {
+    display: block;
+}
+
+.header-1 h1 .char,
+.tooltip .title .line,
+.tooltip .description .line {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.header-1 h1 .char > span,
+.tooltip .icon ion-icon,
+.tooltip .title .line > span,
+.tooltip .description .line > span {
+    position: relative;
+    display: block;
+    transform: translateY(100%); /* Fixed: translativeY -> translateY */
+    will-change: transform;
+}
+
+@media (max-width: 1000px) {
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    h2,
+    .tooltip .icon {
+        font-size: 1.5rem;
+    }
+
+    .tooltips {
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .tooltip {
+        width: 85%;
+    }
+
+    .tooltip:nth-child(2) {
+        justify-content: flex-start;
+        align-items: flex-start;    
+    }
+
+    .tooltip .divider {
+        width: 70%;
+    }
+
+    .tooltip:nth-child(2) .divider {
+        transform-origin: right center;
+    }
+
+    .tooltip:nth-child(2) .icon,
+    .tooltip:nth-child(2) .title {
+        width: 100%;
+    }
+}
