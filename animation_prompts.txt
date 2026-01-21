@@ -1,0 +1,85 @@
+Project Animation Breakdown & Prompts
+
+This project uses GSAP (GreenSock Animation Platform) with ScrollTrigger and Three.js to create a synchronized, interactive scrolling experience.
+
+Here is a breakdown of every animation used in your project, exactly what it does, and a prompt you can use to recreate it individually.
+
+---
+
+1. Initial Text Reveal (Staggered Rise)
+----------------------------------------
+What it does:
+When the `.product-overview` section first comes into view (at 80% of the viewport), it separates the text "Every Rep Starts With" into individual characters. These characters start hidden (pushed down) and slide up one by one in a wave-like motion.
+
+Prompt to Recreate:
+"Using GSAP and SplitType, create a text reveal animation where the heading splits into characters. Set the initial state of the characters to be translated 100% down on the Y-axis. When the section enters the viewport, animate them back to Y: 0 with a staggered 0.025s delay for a smooth 'rising' text effect."
+
+---
+
+2. Pinned Section Scrolling (The Foundation)
+---------------------------------------------
+What it does:
+The entire `.product-overview` section is "pinned" (frozen) in the viewport while the user scrolls. The generic scroll bar moves, but the visual content stays fixed. The `progress` of this scroll bar (0% to 100%) is then used to drive all the other animations below.
+
+Prompt to Recreate:
+"Create a GSAP ScrollTrigger where a section with the class `.product-overview` is pinned (`pin: true`) for a duration of 3000 pixels (`end: '+=3000'`). Enable `scrub: 1` so that all linked animations play smoothly in sync with the scrollbar."
+
+---
+
+3. Header 1 Exit Animation (Fast Slide Left)
+---------------------------------------------
+What it does:
+As you start scrubbing (scrolling), the first header ("Every Rep Starts With") slides quickly to the left and out of the screen. It moves 4x faster than the scroll speed to ensure it's gone before the next text appears.
+
+Prompt to Recreate:
+"Create a scrubbing animation where `.header-1` translates continuously to the left (`xPercent: -100`) as the user scrolls. Accelerate the movement so it exits the screen completely within the first 25% of the scroll timeline."
+
+---
+
+4. Circular Mask Expansion
+---------------------------
+What it does:
+A black circular `div` starts as a tiny dot in the center of the screen. As you scroll past 15%, it expands (`clip-path` grows), creating a 'wipe' effect that can act as a background transition or reveal method.
+
+Prompt to Recreate:
+"Implement a 'spotlight' reveal effect using a `div` with a circular clip-path. As the user scrolls, animate the clip-path radius from `0%` to `300%` so the circle grows from the center to cover the entire screen."
+
+---
+
+5. Header 2 Entry (Slide In from Right)
+----------------------------------------
+What it does:
+The second header ("GRIND Shaker") waits off-screen to the right. Once the scroll progress hits 30%, it slides in from the right to the center (0%), replacing the first header.
+
+Prompt to Recreate:
+"Create a sequenced scroll animation where a second header element starts off-screen to the right (`xPercent: 100`). Once the scroll progress reaches 30%, animate it moving to the center (`xPercent: 0`) and then eventually off to the left, following the user's scroll direction."
+
+---
+
+6. Divider Line Expansion
+--------------------------
+What it does:
+The tooltips have separator lines that start invisible (width 0). As you scroll past the middle of the animation, they expand horizontally to their full width.
+
+Prompt to Recreate:
+"Create a UI animation for a divider line where the `scaleX` property grows from 0 to 1 based on scroll position. Ensure the transform origin is set correctly so the line expands outwards from one side."
+
+---
+
+7. Tooltip Text & Icon Reveal
+------------------------------
+What it does:
+This is a staggered vertical slide effect. The icons, titles, and description text for the tooltips ("Built to last", "Stay Synced") are hidden below their containers. At specific scroll triggers (65% and 85%), they slide up into view.
+
+Prompt to Recreate:
+"Build a staggered reveal for a tooltip card containing an icon, title, and description. Using GSAP ScrollTrigger, animate the elements from `y: 100%` to `y: 0%` when the scroll progress passes a specific threshold (e.g., 0.65). Use `overwrite: true` to ensure the animation is responsive."
+
+---
+
+8. 3D Model Rotation (Synced to Scroll)
+----------------------------------------
+What it does:
+The 3D shaker bottle rotates exactly 360 degrees (2pi radians) from start to finish. The rotation is perfectly locked to the scrollbar—if you stop scrolling, the bottle stops rotating.
+
+Prompt to Recreate:
+"Using Three.js and GSAP ScrollTrigger, load a GLB model into the scene. Bind the model's Y-axis rotation directly to the scroll progress so that scrolling from the top to the bottom of the section rotates the model exactly 360 degrees."
